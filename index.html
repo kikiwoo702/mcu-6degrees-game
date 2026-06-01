@@ -2,7 +2,7 @@
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#1a1c24">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -21,14 +21,20 @@
             --accent-end: #e24a4a;       /* 終點紅 */
         }
 
+        /* 新增 html 設定，強制把網頁最底層的畫布染成跟背景一樣的深色 */
+        html {
+            background-color: #1a1c24;
+            height: 100%;
+        }
+
         body {
             font-family: 'PingFang TC', 'Microsoft JhengHei', sans-serif;
             color: var(--text-color);
             margin: 0;
-            padding: 12px; /* 縮小網頁外邊距，留給手機更多空間 */
+            /* 修正：padding-top 加上環境變數，讓網頁內容自動避開手機上方的瀏海/動態島 */
+            padding: calc(12px + env(safe-area-inset-top)) 12px calc(12px + env(safe-area-inset-bottom)) 12px; 
             display: flex;
             justify-content: center;
-            /* 修正 1：使用 min-height: 100dvh 讓它自動適應手機動態網址列 */
             min-height: 100vh;
             min-height: 100dvh; 
             box-sizing: border-box;
@@ -40,9 +46,7 @@
             background-size: cover;          
             background-position: center;     
             background-repeat: no-repeat;    
-            
-            /* 修正 2：將 fixed 改為 scroll 或直接移除，解決手機瀏覽器的不相容 Bug */
-            background-attachment: scroll;    
+            background-attachment: scroll;
         }
 
         /* 核心包裝：支援電腦大螢幕與手機自適應 */
