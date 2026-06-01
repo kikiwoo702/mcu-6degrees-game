@@ -25,7 +25,9 @@
             padding: 12px; /* 縮小網頁外邊距，留給手機更多空間 */
             display: flex;
             justify-content: center;
+            /* 修正 1：使用 min-height: 100dvh 讓它自動適應手機動態網址列 */
             min-height: 100vh;
+            min-height: 100dvh; 
             box-sizing: border-box;
 
             background-image: 
@@ -35,7 +37,9 @@
             background-size: cover;          
             background-position: center;     
             background-repeat: no-repeat;    
-            background-attachment: fixed;    
+            
+            /* 修正 2：將 fixed 改為 scroll 或直接移除，解決手機瀏覽器的不相容 Bug */
+            background-attachment: scroll;    
         }
 
         /* 核心包裝：支援電腦大螢幕與手機自適應 */
